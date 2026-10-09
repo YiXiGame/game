@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一喜玩</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ff6b35'/%3E%3Ctext x='32' y='42' font-size='30' font-weight='900' text-anchor='middle' fill='%23fff'%3E一%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#1b1410;
+    --bg2:#241a14;
+    --accent:#ff6b35;
+    --accent2:#ffc93c;
+    --ink:#fdf4e6;
+    --muted:#d8c4ae;
+    --line:rgba(255,255,255,.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ===== Header ===== */
+  header{
+    position:sticky;top:0;z-index:10;
+    backdrop-filter:blur(8px);background:rgba(27,20,16,.72);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:10px;padding:14px 0;font-weight:800;letter-spacing:.5px}
+  .brand svg{width:26px;height:26px;flex:none}
+  .brand em{font-style:normal;color:var(--accent)}
+
+  /* ===== Hero ===== */
+  .hero{
+    min-height:78vh;display:flex;align-items:center;
+    background:
+      radial-gradient(1200px 500px at 70% -10%, rgba(255,107,53,.28), transparent 60%),
+      radial-gradient(800px 400px at 10% 100%, rgba(255,201,60,.14), transparent 60%),
+      var(--bg);
+  }
+  .hero .inner{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:center;padding-block:72px 0}
+  .hero h1{
+    font-size:clamp(48px,9vw,92px);font-weight:900;line-height:1.02;letter-spacing:2px;
+    color:var(--ink);
+  }
+  .hero h1 .m{display:inline-block;color:var(--accent);animation:rise 1s ease both}
+  .hero h1 .o{display:inline-block;animation:rise 1s .12s ease both}
+  .hero h1 .y{display:inline-block;color:var(--accent2);animation:rise 1s .24s ease both}
+  @keyframes rise{from{transform:translateY(18px);opacity:0}to{transform:none;opacity:1}}
+  .hero .tag{margin-top:18px;font-size:18px;color:var(--muted);max-width:24em}
+  .hero .cta{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;
+    font-weight:700;text-decoration:none;font-size:15px;border:none;cursor:pointer;
+    transition:transform .15s ease,background .15s ease;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn.primary{background:var(--accent);color:#1b1410}
+  .btn.primary:hover{background:#ff7f4d}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--accent2);color:var(--accent2)}
+  .pad{display:grid;place-items:center}
+  .pad svg{width:min(100%,360px);height:auto;filter:drop-shadow(0 18px 40px rgba(255,107,53,.35))}
+
+  /* ===== Section ===== */
+  section{padding:84px 0}
+  .sec-title{font-size:clamp(28px,5vw,40px);font-weight:900;letter-spacing:1px}
+  .sec-title .dot{color:var(--accent)}
+  .lead{color:var(--muted);max-width:34em;margin-top:14px}
+
+  /* ===== Games ===== */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+  .card{
+    border:1px solid var(--line);border-radius:16px;padding:26px;
+    background:linear-gradient(180deg,var(--bg2),transparent);
+    transition:transform .2s ease,border-color .2s ease;
+  }
+  .card:hover{transform:translateY(-4px);border-color:rgba(255,201,60,.5)}
+  .card .ic{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:rgba(255,107,53,.16);color:var(--accent)}
+  .card h3{margin:16px 0 6px;font-size:19px}
+  .card p{color:var(--muted);font-size:14.5px}
+  .card .soon{margin-top:14px;display:inline-block;font-size:13px;letter-spacing:1px;color:var(--accent2)}
+
+  /* ===== About ===== */
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .about p{color:var(--muted)}
+  .pill{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-weight:700;color:var(--ink)}
+
+  /* ===== Contact ===== */
+  .contact{
+    border-top:1px solid var(--line);
+    background:radial-gradient(700px 300px at 50% 120%, rgba(255,107,53,.16), transparent 60%),var(--bg);
+  }
+  .contact .row{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .contact a{color:var(--accent);text-decoration:none;font-weight:700}
+  .contact a:hover{color:var(--accent2)}
+
+  /* ===== Footer ===== */
+  footer{padding:26px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  @media(max-width:840px){
+    .hero .inner{grid-template-columns:1fr;gap:28px;padding-block:56px 0}
+    .hero{min-height:auto}
+    .pad{order:-1}
+    .cards{grid-template-columns:1fr}
+    .about{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .hero h1 .m,.hero h1 .o,.hero h1 .y{animation:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap brand">
+    <!-- 手柄图形标 -->
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="7" width="20" height="11" rx="5"></rect>
+      <circle cx="7" cy="12" r="1.4" fill="var(--accent)" stroke="none"></circle>
+      <circle cx="17" cy="12" r="1.4" fill="var(--accent)" stroke="none"></circle>
+      <path d="M11 9v3M9.5 10.5h3"></path>
+    </svg>
+    <span>一喜<em>玩</em></span>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap inner">
+      <div>
+        <h1>
+          <span class="m">一</span><span class="o">喜</span><span class="y">玩</span>
+        </h1>
+        <p class="tag">一喜玩是一家专注休闲游戏开发的厂商，把「欢乐」与「好玩」放进每一款作品里。认真做好玩的小游戏，是我们一直在做的事。让我们，一喜游戏一喜玩！</p>
+        <div class="cta">
+          <a class="btn primary" href="#games">看看我们的游戏</a>
+          <a class="btn ghost" href="#contact">联系我们</a>
+        </div>
+      </div>
+      <div class="pad" aria-hidden="true">
+        <!-- 笑脸游戏手柄主视觉 -->
+        <svg viewBox="0 0 120 120" fill="none">
+          <rect x="6" y="6" width="108" height="108" rx="26" fill="url(#g)"/>
+          <circle cx="52" cy="48" r="10" fill="#fff" opacity=".92"/>
+          <circle cx="82" cy="48" r="10" fill="#fff" opacity=".92"/>
+          <circle cx="55" cy="50" r="3" fill="#1b1410"/>
+          <circle cx="85" cy="50" r="3" fill="#1b1410"/>
+          <path d="M55 78c6 6 18 6 24 0" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+          <path d="M30 40h4M32 38v4" stroke="#ffc93c" stroke-width="3.4" stroke-linecap="round"/>
+          <path d="M92 62h6" stroke="#ffc93c" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="96" cy="72" r="3.2" fill="#ffc93c"/>
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ff7f4d"/><stop offset="1" stop-color="#ff5a1f"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="games">
+    <div class="wrap">
+      <h2 class="sec-title">我们的游戏<span class="dot">.</span></h2>
+      <p class="lead">轻松上手、随时开玩的休闲小游戏。新作品正在筹备中。</p>
+      <div class="cards">
+        <div class="card">
+          <div class="ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+          </div>
+          <h3>首款游戏</h3>
+          <p>休闲小游戏 · 打磨中，敬请期待。</p>
+          <span class="soon">制作中</span>
+        </div>
+        <div class="card">
+          <div class="ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M7 8h10M7 16h10"/></svg>
+          </div>
+          <h3>更多作品</h3>
+          <p>更多轻松有趣的玩法，正在路上。</p>
+          <span class="soon">即将上线</span>
+        </div>
+        <div class="card">
+          <div class="ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M8 10h8"/></svg>
+          </div>
+          <h3>联系合作</h3>
+          <p>发行、联运、广告合作都欢迎聊聊。</p>
+          <span class="soon"><a href="#contact" style="color:inherit;text-decoration:none">找我们</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" style="padding-top:0">
+    <div class="wrap about">
+      <div>
+        <h2 class="sec-title">关于一喜玩<span class="dot">.</span></h2>
+        <p style="margin-top:16px">一喜玩专注休闲、小体量的游戏作品，把创意落在容易上手、随时可玩的玩法上。我们希望玩家在忙碌的间隙里，也能轻松收获一份快乐。</p>
+        <p style="margin-top:12px">认真做小游戏，是一喜玩最大的诚意。</p>
+        <span class="pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          欢乐 · 好玩 · 认真
+        </span>
+      </div>
+      <div style="color:var(--muted);font-size:15px">
+        <p style="margin-bottom:10px">独立游戏开发者，作品以休闲品类为核心。</p>
+        <p style="margin-bottom:10px">从玩法构思到上线，坚持亲自打磨每一个细节。</p>
+        <p>欢迎玩家与同行交流反馈。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="row">
+        <div>
+          <h2 class="sec-title">联系我们<span class="dot">.</span></h2>
+          <p class="lead">合作、建议或任何想聊的，欢迎写信给我们。</p>
+        </div>
+        <div>
+          <p style="margin-bottom:6px">商务 / 合作邮箱</p>
+          <a href="mailto:hello@example.com">jancybak@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> 一喜玩 · 认真做小游戏</span>
+    <span>Made with fun</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
